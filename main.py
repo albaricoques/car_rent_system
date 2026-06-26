@@ -217,7 +217,7 @@ class SistemaAlquiler:
 if __name__ == "__main__":
     sistema = SistemaAlquiler()
     
-    # 1. DATOS QUEMADOS (Para probar rápido en la exposición)
+    #DATOS QUEMADOS
     sistema.registrar_vehiculo(Vehiculo("ABC-123", "Toyota", "Corolla", 120.0))
     sistema.registrar_vehiculo(Vehiculo("XYZ-987", "Kia", "Rio", 95.0))
     sistema.registrar_cliente(Cliente("77778888", "Carlos Rojas", "A-I", 2020))
@@ -225,7 +225,7 @@ if __name__ == "__main__":
     
     contador_reservas = 1
 
-    # 2. BUCLE PRINCIPAL DEL MENÚ
+    #BUCLE PRINCIPAL DEL MENÚ
     while True:
         print("\n" + "="*45)
         print("   SISTEMA DE ALQUILER DE VEHÍCULOS")
