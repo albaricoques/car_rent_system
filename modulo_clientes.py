@@ -9,66 +9,72 @@ class Cliente:
     def __init__(self, dni, nombre, categoria_licencia, anio_emision):
         self._dni = dni
         self._nombre = nombre
-        self._licensia = (categoria_licencia, anio_emision)
-        self._historia_reservas = []
+        self._licencia = (categoria_licencia, anio_emision)
+        self._historial_reservas = []
 
+    # Métodos públicos (Getters)
     def get_dni(self):
         return self._dni
-    
+
     def get_nombre(self):
         return self._nombre
-    
-    def get_licensia(self):
+
+    def get_licencia(self):
         return self._licencia
-    
+
     def get_historial(self):
-        return self._historia_reservas
-    
-    def agreagar_al_historia(self, id_reservas):
-        self._historia_reservas.append(id_reservas)
+        return self._historial_reservas
+
+    def agregar_al_historial(self, id_reserva):
+        self._historial_reservas.append(id_reserva)
+
     def __str__(self):
-        cat, anio = self._licencia
-        return f"[{self._dni}] {self._nombre} | licencia: {cat}({anio}) | Alquileres realizados: {len(self._historia_reservas)}"
+        categoria, anio = self._licencia
+        cantidad_reservas = len(self._historial_reservas)
+        return f"[{self._dni}] Cliente: {self._nombre} | Licencia: {categoria} ({anio}) | Alquileres previos: {cantidad_reservas}"
 
 class SistemaAlquiler:
     def __init__(self):
         self._clientes = {}
 
-def registrar_cliente(self, cliente):
-    dni = cliente.get_dni()
-    if dni in self._clientes:
-        print(f"El cliente con el DNI {dni} ya se encuentra registrado.")
-    else:
-        self.clientes[dni] = cliente
-        print(f"Èxito: Cliente {cliente.get_nombre()} registrado correctamente.")
+    def registrar_cliente(self, cliente):
+        dni = cliente.get_dni()
+        
+        if dni in self._clientes:
+            print(f"Atención: El cliente con DNI {dni} ya está registrado en el sistema.")
+        else:
+            self._clientes[dni] = cliente
+            print(f"Éxito: Cliente {cliente.get_nombre()} registrado correctamente.")
 
-def bucar_cliente(self, dni):
-    if dni not in self._clientes:
-        raise ClienteNoEncontradoError(f"Error: No se encontro ningùn cliente con el DNI de '{dni}'.")
-    return self.clientes[dni]
+    def buscar_cliente(self, dni):
+        if dni not in self._clientes:
+            raise ClienteNoEncontradoError(f"Error: No se encontró ningún cliente con el DNI '{dni}'.")
+        
+        return self._clientes[dni]
 
-def validar_licencia(self, dni, categoria_requerida):
-    cliente = self.buscar_cliente(dni)
-    categoria_cliente, anio = cliente.get_licencia()
-
-    if categoria_cliente == categoria_requerida:
-        print(f"Validacion exitosa{cliente.get_nombre} cumple con la categoria {categoria_requerida}.")
-        return True
-    
-    elif categoria_cliente == "A-III":
-        print(f"Validacion profecional: Licencia A-III autoriza a {cliente.get_nombre()} para cualquier vehiculo.")
-        return True
-    else:
-        print(f"Validacion denegada {cliente.get_nombre} tiene {categoria_cliente} pero requiere {categoria_requerida}.")
-
-def mostrar_clientes(self):
-    print("\n---Directorio de clientes---")
-    if not self._clientes:
-        print("No hay clientes en el sistema.")
-    else:
-        for cliente in self._clientes.value():
-            print(cliente)
-    print("------------------------------\n")
+    def validar_licencia(self, dni, categoria_requerida):
+        cliente = self.buscar_cliente(dni)
+        
+        categoria_cliente, anio_emision = cliente.get_licencia()
+        
+        if categoria_cliente == categoria_requerida:
+            print(f"Validación exitosa: {cliente.get_nombre()} tiene la licencia exacta ({categoria_requerida}).")
+            return True
+        elif categoria_cliente == "A-III":
+            print(f"Validación exitosa: {cliente.get_nombre()} tiene licencia profesional (A-III), apto para todo.")
+            return True
+        else:
+            print(f"Denegado: {cliente.get_nombre()} tiene {categoria_cliente}, necesita {categoria_requerida}.")
+            return False
+            
+    def mostrar_clientes(self):
+        print("\n--- Directorio de Clientes ---")
+        if not self._clientes:
+            print("No hay clientes registrados.")
+        else:
+            for cliente in self._clientes.values():
+                print(cliente)
+        print("------------------------------\n")
 
 """
 # --- ZONA DE PRUEBAS DEL INTEGRANTE 2 ---
