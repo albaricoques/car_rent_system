@@ -33,6 +33,7 @@ class Vehiculo:
     def is_disponible(self): return self._disponible
     def set_disponibilidad(self, estado: bool): self._disponible = estado
 
+    #Método polimórfico
     def calcular_tarifa(self, dias):
         return self._precio_diario * dias
 
@@ -58,7 +59,6 @@ class CamionetaSUV(Vehiculo):
         super().__init__(placa, marca, modelo, precio_diario)
         self._traccion_4x4 = traccion_4x4
 
-    # Aplicación del polimorfismo para el metodo de calcular tarifas (si el venhiculo es una SUV, le sumará S/ 20 diarios por el seguro todo terreno)
     def calcular_tarifa(self, dias):
         tarifa_base = super().calcular_tarifa(dias)
         seguro_todoterreno = 20.0 * dias
@@ -75,9 +75,7 @@ class Cliente:
     def __init__(self, dni, nombre, categoria_licencia, anio_emision):
         self._dni = dni
         self._nombre = nombre
-        # TUPLA: Datos inmutables
         self._licencia = (categoria_licencia, anio_emision)
-        # LISTA: Historial dinámico
         self._historial_reservas = []
 
     def get_dni(self): return self._dni
@@ -107,7 +105,6 @@ class ClienteVip(Cliente):
         super().__init__(dni, nombre, categoria_licencia, anio_emision)
         self._codigo_membresia = codigo_membresia
 
-    # Polimorfismo aplicado al método para aplicar descuento (aplicará 15% de descuento si el cliente es VIP)
     def aplicar_descuento(self, monto):
         return monto * 0.85
 
@@ -151,10 +148,10 @@ class Reserva:
 # ====================================
 class SistemaAlquiler:
     def __init__(self):
-        self._flota = {}            # DICCIONARIO para inventario de vehículos
-        self._clientes = {}         # DICCIONARIO para registro de usuarios
-        self._reservas = {}         # DICCIONARIO para transacciones
-        self._vehiculos_en_ruta = set()  # SET para validar disponibilidad ultrarrápida
+        self._flota = {}           
+        self._clientes = {}         
+        self._reservas = {}         
+        self._vehiculos_en_ruta = set() 
 
     # Métodos del modulo flota
     #-------------------------
